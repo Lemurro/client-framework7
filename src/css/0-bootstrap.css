@@ -1,0 +1,82 @@
+/*
+.d8888. db   d8b   db d88888b d88888b d888888b  .d8b.  db      d88888b d8888b. d888888b .d888b.
+88'  YP 88   I8I   88 88'     88'     `~~88~~' d8' `8b 88      88'     88  `8D `~~88~~' VP  `8D
+`8bo.   88   I8I   88 88ooooo 88ooooo    88    88ooo88 88      88ooooo 88oobY'    88       odD'
+  `Y8b. Y8   I8I   88 88~~~~~ 88~~~~~    88    88~~~88 88      88~~~~~ 88`8b      88     .88'
+db   8D `8b d8'8b d8' 88.     88.        88    88   88 88booo. 88.     88 `88.    88    j88.
+`8888Y'  `8b8' `8d8'  Y88888P Y88888P    YP    YP   YP Y88888P Y88888P 88   YD    YP    888888D
+*/
+
+.swal2-container {
+    z-index: 100000;
+}
+
+.swal2-modal {
+    border-radius: 3px;
+}
+
+.swal2-modal .swal2-textarea {
+    border: 1px solid #2196f3;
+    border-radius: 2px;
+}
+
+.swal2-modal .swal2-styled {
+    border-radius: 0;
+    padding: 10px 15px;
+    width: auto;
+}
+
+.swal2-modal .swal2-styled:focus {
+    outline: 0;
+}
+
+/*
+d88888b d8888b.  .d8b.  .88b  d88. d88888b db   d8b   db  .d88b.  d8888b. db   dD d88888D
+88'     88  `8D d8' `8b 88'YbdP`88 88'     88   I8I   88 .8P  Y8. 88  `8D 88 ,8P' VP  d8'
+88ooo   88oobY' 88ooo88 88  88  88 88ooooo 88   I8I   88 88    88 88oobY' 88,8P      d8'
+88~~~   88`8b   88~~~88 88  88  88 88~~~~~ Y8   I8I   88 88    88 88`8b   88`8b     d8'
+88      88 `88. 88   88 88  88  88 88.     `8b d8'8b d8' `8b  d8' 88 `88. 88 `88.  d8'
+YP      88   YD YP   YP YP  YP  YP Y88888P  `8b8' `8d8'   `Y88P'  88   YD YP   YD d8'
+*/
+
+.page {
+    background: #efeff4 !important;
+}
+
+.preloader-backdrop {
+    background: rgba(0,0,0,.4) !important;
+    opacity: 1 !important;
+}
+
+input {
+    border-bottom: 1px #000 solid !important;
+}
+
+/*
+db       .d88b.   d888b  d888888b d8b   db        .d8888.  .o88b. d8888b. d88888b d88888b d8b   db
+88      .8P  Y8. 88' Y8b   `88'   888o  88        88'  YP d8P  Y8 88  `8D 88'     88'     888o  88
+88      88    88 88         88    88V8o 88        `8bo.   8P      88oobY' 88ooooo 88ooooo 88V8o 88
+88      88    88 88  ooo    88    88 V8o88 C8888D   `Y8b. 8b      88`8b   88~~~~~ 88~~~~~ 88 V8o88
+88booo. `8b  d8' 88. ~8~   .88.   88  V888        db   8D Y8b  d8 88 `88. 88.     88.     88  V888
+Y88888P  `Y88P'   Y888P  Y888888P VP   V8P        `8888Y'  `Y88P' 88   YD Y88888P Y88888P VP   V8P
+*/
+
+.login-screen-content {
+    background: url('img/bg/login-screen.jpg') no-repeat fixed center top;
+    background-size: cover;
+}
+
+.login-screen__form {
+    margin: 5% auto;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 5px;
+    background-clip: padding-box;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 13px 3px rgba(0, 0, 0, .5);
+    max-width: 300px;
+}
+
+.login-screen-title img {
+    width: 100%;
+    max-width: 197px;
+}
