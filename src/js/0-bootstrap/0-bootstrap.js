@@ -1,7 +1,7 @@
 /**
  * Загрузочный скрипт приложения
  *
- * @version 02.02.2018
+ * @version 17.04.2018
  * @author  Дмитрий Щербаков <atomcms@ya.ru>
  */
 
@@ -39,10 +39,12 @@ var bootstrap = (function () {
     /**
      * Инициализация
      *
-     * @version 02.02.2018
+     * @version 17.04.2018
      * @author  Дмитрий Щербаков <atomcms@ya.ru>
      */
     function init() {
+        _bindJSerrors();
+
         app      = new Framework7(config.f7settings);
         $$       = Dom7;
         mainView = app.views.create('.view-main');
@@ -217,6 +219,60 @@ var bootstrap = (function () {
         $$('#js-login-screen .js-auth-form').hide();
         $$('#js-auth-' + config.auth.type + '-get-form').show();
         app.loginScreen.open('#js-login-screen');
+    }
+
+    //         d8888b. d888888b d8b   db d8888b.    d88b .d8888. d88888b d8888b. d8888b.  .d88b.  d8888b. .d8888.
+    //         88  `8D   `88'   888o  88 88  `8D    `8P' 88'  YP 88'     88  `8D 88  `8D .8P  Y8. 88  `8D 88'  YP
+    //         88oooY'    88    88V8o 88 88   88     88  `8bo.   88ooooo 88oobY' 88oobY' 88    88 88oobY' `8bo.
+    //         88~~~b.    88    88 V8o88 88   88     88    `Y8b. 88~~~~~ 88`8b   88`8b   88    88 88`8b     `Y8b.
+    //         88   8D   .88.   88  V888 88  .8D db. 88  db   8D 88.     88 `88. 88 `88. `8b  d8' 88 `88. db   8D
+    // C88888D Y8888P' Y888888P VP   V8P Y8888D' Y8888P  `8888Y' Y88888P 88   YD 88   YD  `Y88P'  88   YD `8888Y'
+    //
+    //
+
+    /**
+     * Событие отправки javascript-ошибки при возникновении
+     *
+     * @version 17.04.2018
+     * @author  Дмитрий Щербаков <atomcms@ya.ru>
+     */
+    function _bindJSerrors() {
+        /**
+         * Отправка javascript-ошибки
+         *
+         * @param {string} msg
+         * @param {string} file
+         * @param {string} line
+         * @param {string} col
+         * @param {string} err
+         *
+         * @version 17.04.2018
+         * @author  Дмитрий Щербаков <atomcms@ya.ru>
+         */
+        function sendError(msg, file, line, col, err) {
+            var errString = 'JSON not found';
+            if (window.JSON) {
+                errString = JSON.stringify(err);
+            }
+
+            if (typeof(msg) === 'object') {
+                file      = msg.filename;
+                line      = msg.lineno;
+                col       = msg.colno;
+                errString = msg.error.stack;
+                msg       = msg.message;
+            }
+
+            new Image().src = pathServerAPI + 'jserrors?msg=' + encodeURIComponent(msg) + '&file=' + encodeURIComponent(file) + '&line=' + encodeURIComponent(line) + '&col=' + encodeURIComponent(col) + '&err=' + encodeURIComponent(errString);
+        }
+
+        if (window.addEventListener) {
+            window.addEventListener('error', sendError, false);
+        } else if (window.attachEvent) {
+            window.attachEvent('onerror', sendError);
+        } else {
+            window.onerror = sendError;
+        }
     }
 
     //         d8888b. d888888b d8b   db d8888b. .d8888. db   db  .d88b.  db   d8b   db d8888b.  .d88b.  d8888b.  .d88b.  db    db d88888b d8888b.
