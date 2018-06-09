@@ -18,7 +18,7 @@ gulp.task('build', ['libs'], function () {
     // Проводим замены в файле home.html
     gulp.src('index.html')
         .pipe(replace('<!-- cordova.js here -->', '<script type="text/javascript" src="cordova.js"></script>'))
-        .pipe(replace("var pathServerAPI = 'http://lemurro-server.localhost/';", "var pathServerAPI = 'http://lemurro.dimns.ru/';"))
+        .pipe(replace("var pathServerAPI = 'http://lemurro-api.localhost/';", "var pathServerAPI = 'http://your.api.domain.tld/';"))
         .pipe(replace('var modeCordova   = false;', 'var modeCordova   = true;'))
         .pipe(replace('var modeWeb       = true;', 'var modeWeb       = false;'))
         .pipe(gulp.dest('build'));
