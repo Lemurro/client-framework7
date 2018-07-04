@@ -60,7 +60,6 @@ gulp.task('libs', function () {
     var libs = [
         'bower_components/framework7/dist/css/framework7.min.css',
         'bower_components/framework7/dist/js/framework7.min.js',
-        'bower_components/hammerjs/hammer.min.js',
         'bower_components/inputmask/dist/inputmask/dependencyLibs/inputmask.dependencyLib.js',
         'bower_components/inputmask/dist/min/inputmask/inputmask.min.js',
         'bower_components/jsdeferred/jsdeferred.nodoc.js',
