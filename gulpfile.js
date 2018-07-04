@@ -5,57 +5,52 @@ var replace  = require('gulp-replace');   // Замена внутри файл�
 var uglify   = require('gulp-uglify');    // Минификация JS
 
 // Сборка проекта для тестирования
-gulp.task('default', ['watcher', 'js', 'css', 'libs']);
+gulp.task('default', ['libs', 'app.css', 'app.js', 'watcher.css', 'watcher.js']);
 
 // Сборка проекта для релиза
-gulp.task('build', ['libs'], function () {
-    // Копируем необходимые файлы
-    gulp.src(['assets/**/*', '!assets/bootstrap.js', '!assets/bootstrap.css'])
-        .pipe(gulp.dest('build/assets'));
-    gulp.src('pages/*')
-        .pipe(gulp.dest('build/pages'));
+gulp.task('build', ['libs', 'app.css', 'app.js', 'copy.assets', 'copy.pages', 'index.html']);
 
-    // Проводим замены в файле home.html
-    gulp.src('index.html')
+gulp.task('watcher.css', function () {
+    return gulp.watch('src/css/*.css', ['app.css']);
+});
+
+gulp.task('watcher.js', function () {
+    return gulp.watch('src/js/**/*.js', ['app.js']);
+});
+
+gulp.task('app.css', function () {
+    return gulp.src('src/css/*.css')
+        .pipe(concat('bootstrap.css'))
+        .pipe(cleanCSS())
+        .pipe(gulp.dest('assets'));
+});
+
+gulp.task('app.js', function () {
+    return gulp.src('src/js/**/*.js')
+        .pipe(concat('bootstrap.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('assets'));
+});
+
+gulp.task('copy.assets', function () {
+    return gulp.src('assets/**/*')
+        .pipe(gulp.dest('build/assets'));
+});
+
+gulp.task('copy.pages', function () {
+    return gulp.src('pages/*')
+        .pipe(gulp.dest('build/pages'));
+});
+
+gulp.task('index.html', function () {
+    return gulp.src('index.html')
         .pipe(replace('<!-- cordova.js here -->', '<script type="text/javascript" src="cordova.js"></script>'))
         .pipe(replace("var pathServerAPI = 'http://lemurro-api.localhost/';", "var pathServerAPI = 'http://your.api.domain.tld/';"))
         .pipe(replace('var modeCordova   = false;', 'var modeCordova   = true;'))
         .pipe(replace('var modeWeb       = true;', 'var modeWeb       = false;'))
         .pipe(gulp.dest('build'));
-
-    // bootstrap.js
-    gulp.src('src/js/**/*.js')
-        .pipe(concat('bootstrap.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('build/assets'));
-
-    // bootstrap.css
-    gulp.src('src/css/*.css')
-        .pipe(concat('bootstrap.css'))
-        .pipe(cleanCSS())
-        .pipe(gulp.dest('build/assets'));
 });
 
-gulp.task('watcher', function () {
-    gulp.watch('src/js/**/*.js', ['js']);
-    gulp.watch('src/css/*.css', ['css']);
-});
-
-gulp.task('js', function () {
-    // bootstrap.js
-    gulp.src('src/js/**/*.js')
-        .pipe(concat('bootstrap.js'))
-        .pipe(gulp.dest('assets'));
-});
-
-gulp.task('css', function () {
-    // bootstrap.css
-    gulp.src('src/css/*.css')
-        .pipe(concat('bootstrap.css'))
-        .pipe(gulp.dest('assets'));
-});
-
-// Перенос необходимых библиотек
 gulp.task('libs', function () {
     var libs = [
         'bower_components/framework7/dist/css/framework7.min.css',
