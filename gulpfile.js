@@ -20,14 +20,14 @@ gulp.task('watcher.js', function () {
 
 gulp.task('app.css', function () {
     return gulp.src('src/css/*.css')
-        .pipe(concat('bootstrap.css'))
+        .pipe(concat('app.min.css'))
         .pipe(cleanCSS())
         .pipe(gulp.dest('assets'));
 });
 
 gulp.task('app.js', function () {
     return gulp.src('src/js/**/*.js')
-        .pipe(concat('bootstrap.js'))
+        .pipe(concat('app.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('assets'));
 });
@@ -47,7 +47,6 @@ gulp.task('index.html', function () {
         .pipe(replace('<!-- cordova.js here -->', '<script type="text/javascript" src="cordova.js"></script>'))
         .pipe(replace("var pathServerAPI = 'http://lemurro-api.localhost/';", "var pathServerAPI = 'http://your.api.domain.tld/';"))
         .pipe(replace('var modeCordova   = false;', 'var modeCordova   = true;'))
-        .pipe(replace('var modeWeb       = true;', 'var modeWeb       = false;'))
         .pipe(gulp.dest('build'));
 });
 

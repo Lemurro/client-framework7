@@ -15,17 +15,20 @@
 
     <title>Lemurro</title>
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="assets/fonts/icofont-1.0.0/css/icofont.css">
-
     <!-- Framework7 -->
     <link rel="stylesheet" href="assets/plugins/framework7.min.css">
+
+    <!-- Fontawesome 5 -->
+    <link rel="stylesheet" href="assets/fonts/fontawesome-free-5.1.0/css/all.css">
 
     <!-- Sweet Alert 2 -->
     <link rel="stylesheet" href="assets/plugins/sweetalert2.min.css">
 
-    <!-- Override -->
-    <link rel="stylesheet" href="assets/bootstrap.css">
+    <!-- Core -->
+    <link rel="stylesheet" href="assets/core.min.css">
+
+    <!-- App -->
+    <link rel="stylesheet" href="assets/app.min.css">
 </head>
 
 <body>
@@ -39,12 +42,12 @@
             <div class="block">
                 <p>
                     <a href="/home" class="button button-raised button-fill text-align-left">
-                        <i class="icofont icofont-home"></i> Главная
+                        <i class="fas fa-fw fa-home"></i> Главная
                     </a>
                 </p>
                 <p>
                     <a href="/about" class="button button-raised button-fill text-align-left">
-                        <i class="icofont icofont-info-circle"></i> О приложении
+                        <i class="fas fa-fw fa-info"></i> О приложении
                     </a>
                 </p>
                 <p class="text-align-center">
@@ -55,11 +58,8 @@
 
         <!-- Right panel with reveal effect -->
         <div class="panel panel-right panel-reveal">
-            <div class="block">
-                <p>
-                    Правый сайдбар
-                </p>
-            </div>
+            <!-- Динамический контент -->
+            <div id="js-user_info" class="block"></div>
         </div>
 
         <!-- Views -->
@@ -186,7 +186,7 @@
     <div id="js-popup" class="popup tablet-fullscreen">
         <div class="popup__header">
             <div class="float-right">
-                <a href="#" class="popup-close"><i class="icofont icofont-close"></i> Закрыть</a>
+                <a href="#" class="popup-close"><i class="fas fa-times"></i> Закрыть</a>
             </div>
             <div class="popup__title">
                 <!-- Заголовок -->
@@ -196,6 +196,16 @@
             <!-- Содержимое -->
         </div>
     </div>
+
+    <!-- Шаблон правого сайдбара -->
+    <script id="js-tpl-user__info" type="text/template7">
+        <p>
+            <i class="fas fa-fw fa-hashtag"></i> {{user_id}}
+        </p>
+        <p>
+            <i class="fas fa-fw fa-envelope"></i> {{auth_id}}
+        </p>
+    </script>
 
     <!-- Framework7 -->
     <script type="text/javascript" src="assets/plugins/framework7.min.js"></script>
@@ -211,15 +221,25 @@
     <script type="text/javascript" src="assets/plugins/jsdeferred.nodoc.js"></script>
     <script type="text/javascript" src="assets/plugins/localforage.min.js"></script>
 
+    <!-- cordova.js here -->
+
     <!-- App -->
     <script type="text/javascript">
         var pathServerAPI = 'http://lemurro-api.localhost/';
         var modeCordova   = false;
-        var modeWeb       = false;
+
+        // Переопределение настроек приложения
+        var overrideSettings = {};
+
+        // Переопределение настроек framework7
+        var overrideF7Settings = {};
     </script>
-    <!-- cordova.js here -->
-    <script type="text/javascript" src="assets/config.js"></script>
-    <script type="text/javascript" src="assets/bootstrap.js"></script>
+
+    <!-- Core -->
+    <script type="text/javascript" src="assets/core.min.js"></script>
+
+    <!-- App -->
+    <script type="text/javascript" src="assets/app.min.js"></script>
 </body>
 
 </html>
