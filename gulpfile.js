@@ -5,10 +5,10 @@ var replace  = require('gulp-replace');   // Замена внутри файл�
 var uglify   = require('gulp-uglify');    // Минификация JS
 
 // Сборка проекта для тестирования
-gulp.task('default', ['libs', 'app.css', 'app.js', 'watcher.css', 'watcher.js']);
+gulp.task('default', ['libs', 'core', 'app.css', 'app.js', 'watcher.css', 'watcher.js']);
 
 // Сборка проекта для релиза
-gulp.task('build', ['libs', 'app.css', 'app.js', 'copy.assets', 'copy.pages', 'index.html']);
+gulp.task('build', ['libs', 'core', 'app.css', 'app.js', 'copy.assets', 'copy.pages', 'index.html']);
 
 gulp.task('watcher.css', function () {
     return gulp.watch('src/css/*.css', ['app.css']);
@@ -48,6 +48,16 @@ gulp.task('index.html', function () {
         .pipe(replace("var pathServerAPI = 'http://lemurro-api.localhost/';", "var pathServerAPI = 'http://your.api.domain.tld/';"))
         .pipe(replace('var modeCordova   = false;', 'var modeCordova   = true;'))
         .pipe(gulp.dest('build'));
+});
+
+gulp.task('core', function () {
+    var core = [
+        'bower_components/lemurro-client-framework7-core-frontend/dist/core.min.css',
+        'bower_components/lemurro-client-framework7-core-frontend/dist/core.min.js'
+    ];
+
+    return gulp.src(core)
+        .pipe(gulp.dest('assets'));
 });
 
 gulp.task('libs', function () {

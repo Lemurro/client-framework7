@@ -12,6 +12,7 @@
     "framework7": "framework7io/framework7#^2.0.7",
     "inputmask": "RobinHerbots/Inputmask#^3.3.11",
     "localforage": "localForage/localForage#^1.5.6",
-    "jsdeferred": "cho45/jsdeferred#^0.3.4"
+    "jsdeferred": "cho45/jsdeferred#^0.3.4",
+    "lemurro-client-framework7-core-frontend": "^0.1.0"
   }
 }
