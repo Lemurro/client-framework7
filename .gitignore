@@ -1,8 +1,10 @@
 .idea
 .vscode
 assets/plugins
-assets/bootstrap.css
-assets/bootstrap.js
+assets/app.min.css
+assets/app.min.js
+assets/core.min.css
+assets/core.min.js
 bower_components
 node_modules
 vendor
