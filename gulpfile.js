@@ -29,8 +29,8 @@ gulp.task('app.js', function () {
 
 gulp.task('core', function () {
     var core = [
-        'bower_components/lemurro-client-framework7-core-frontend/dist/core.min.css',
-        'bower_components/lemurro-client-framework7-core-frontend/dist/core.min.js'
+        'node_modules/lemurro-client-framework7-core-frontend/dist/core.min.css',
+        'node_modules/lemurro-client-framework7-core-frontend/dist/core.min.js'
     ];
 
     return gulp.src(core)
@@ -39,14 +39,14 @@ gulp.task('core', function () {
 
 gulp.task('libs', function () {
     var libs = [
-        'bower_components/framework7/packages/core/css/framework7.min.css',
-        'bower_components/framework7/packages/core/js/framework7.min.js',
-        'bower_components/inputmask/dist/inputmask/dependencyLibs/inputmask.dependencyLib.js',
-        'bower_components/inputmask/dist/min/inputmask/inputmask.min.js',
-        'bower_components/jsdeferred/jsdeferred.nodoc.js',
-        'bower_components/localforage/dist/localforage.min.js',
-        'bower_components/sweetalert2/dist/sweetalert2.min.css',
-        'bower_components/sweetalert2/dist/sweetalert2.min.js'
+        'node_modules/framework7/css/framework7.min.css',
+        'node_modules/framework7/js/framework7.min.js',
+        'node_modules/inputmask/dist/min/inputmask/dependencyLibs/inputmask.dependencyLib.min.js',
+        'node_modules/inputmask/dist/min/inputmask/inputmask.min.js',
+        'node_modules/jsdeferred/jsdeferred.nodoc.js',
+        'node_modules/localforage/dist/localforage.min.js',
+        'node_modules/sweetalert2/dist/sweetalert2.min.css',
+        'node_modules/sweetalert2/dist/sweetalert2.min.js'
     ];
 
     return gulp.src(libs)
@@ -72,8 +72,8 @@ gulp.task('build.app.js', function () {
 
 gulp.task('build.core', function () {
     var core = [
-        'bower_components/lemurro-client-framework7-core-frontend/dist/core.min.css',
-        'bower_components/lemurro-client-framework7-core-frontend/dist/core.min.js'
+        'node_modules/lemurro-client-framework7-core-frontend/dist/core.min.css',
+        'node_modules/lemurro-client-framework7-core-frontend/dist/core.min.js'
     ];
 
     return gulp.src(core)
@@ -82,14 +82,14 @@ gulp.task('build.core', function () {
 
 gulp.task('build.libs', function () {
     var libs = [
-        'bower_components/framework7/packages/core/css/framework7.min.css',
-        'bower_components/framework7/packages/core/js/framework7.min.js',
-        'bower_components/inputmask/dist/inputmask/dependencyLibs/inputmask.dependencyLib.js',
-        'bower_components/inputmask/dist/min/inputmask/inputmask.min.js',
-        'bower_components/jsdeferred/jsdeferred.nodoc.js',
-        'bower_components/localforage/dist/localforage.min.js',
-        'bower_components/sweetalert2/dist/sweetalert2.min.css',
-        'bower_components/sweetalert2/dist/sweetalert2.min.js'
+        'node_modules/framework7/css/framework7.min.css',
+        'node_modules/framework7/js/framework7.min.js',
+        'node_modules/inputmask/dist/min/inputmask/dependencyLibs/inputmask.dependencyLib.min.js',
+        'node_modules/inputmask/dist/min/inputmask/inputmask.min.js',
+        'node_modules/jsdeferred/jsdeferred.nodoc.js',
+        'node_modules/localforage/dist/localforage.min.js',
+        'node_modules/sweetalert2/dist/sweetalert2.min.css',
+        'node_modules/sweetalert2/dist/sweetalert2.min.js'
     ];
 
     return gulp.src(libs)
