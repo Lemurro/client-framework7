@@ -7,6 +7,7 @@
     "gulp-uglify": "^1.5.4"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.2.0",
     "framework7": "^3.0.7",
     "inputmask": "^4.0.0",
     "jsdeferred": "^0.4.0",

@@ -5,7 +5,7 @@ var replace  = require('gulp-replace');   // Замена внутри файл�
 var uglify   = require('gulp-uglify');    // Минификация JS
 
 // Сборка проекта для тестирования
-gulp.task('default', ['libs', 'core', 'app.css', 'app.js', 'watcher.css', 'watcher.js']);
+gulp.task('default', ['libs', 'fontawesome', 'core', 'app.css', 'app.js', 'watcher.css', 'watcher.js']);
 
 gulp.task('watcher.css', function () {
     return gulp.watch('src/css/*.css', ['app.css']);
@@ -53,8 +53,20 @@ gulp.task('libs', function () {
         .pipe(gulp.dest('assets/plugins'));
 });
 
+gulp.task('fontawesome', ['fontawesome.css', 'fontawesome.webfonts']);
+
+gulp.task('fontawesome.css', function () {
+    return gulp.src('node_modules/@fortawesome/fontawesome-free/css/all.min.css')
+        .pipe(gulp.dest('assets/fonts/fontawesome-free/css'));
+});
+
+gulp.task('fontawesome.webfonts', function () {
+    return gulp.src('node_modules/@fortawesome/fontawesome-free/webfonts/*')
+        .pipe(gulp.dest('assets/fonts/fontawesome-free/webfonts'));
+});
+
 // Сборка проекта для релиза
-gulp.task('build', ['build.libs', 'build.core', 'build.app.css', 'build.app.js', 'build.copy.assets', 'build.copy.pages', 'build.index.html']);
+gulp.task('build', ['build.libs', 'build.fontawesome', 'build.core', 'build.app.css', 'build.app.js', 'build.copy.assets', 'build.copy.pages', 'build.index.html']);
 
 gulp.task('build.app.css', function () {
     return gulp.src('src/css/*.css')
@@ -94,6 +106,18 @@ gulp.task('build.libs', function () {
 
     return gulp.src(libs)
         .pipe(gulp.dest('build/assets/plugins'));
+});
+
+gulp.task('build.fontawesome', ['build.fontawesome.css', 'build.fontawesome.webfonts']);
+
+gulp.task('build.fontawesome.css', function () {
+    return gulp.src('node_modules/@fortawesome/fontawesome-free/css/all.min.css')
+        .pipe(gulp.dest('build/assets/fonts/fontawesome-free/css'));
+});
+
+gulp.task('build.fontawesome.webfonts', function () {
+    return gulp.src('node_modules/@fortawesome/fontawesome-free/webfonts/*')
+        .pipe(gulp.dest('build/assets/fonts/fontawesome-free/webfonts'));
 });
 
 gulp.task('build.copy.assets', function () {
