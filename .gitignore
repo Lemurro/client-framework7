@@ -1,5 +1,6 @@
 .idea
 .vscode
+assets/fonts/fontawesome-free
 assets/plugins
 assets/app.min.css
 assets/app.min.js
