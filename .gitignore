@@ -1,12 +1,2 @@
-.idea
-.vscode
-assets/fonts/fontawesome-free
-assets/plugins
-assets/app.min.css
-assets/app.min.js
-assets/core.min.css
-assets/core.min.js
-bower_components
 build
 node_modules
-vendor
