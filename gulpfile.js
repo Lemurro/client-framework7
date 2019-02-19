@@ -78,11 +78,27 @@ function indexHTMLProd() {
         .pipe(gulp.dest('build'));
 }
 
+// FONTAWESOME
+
+function fontawesomeCSS() {
+    return gulp.src('node_modules/@fortawesome/fontawesome-free/css/all.min.css')
+        .pipe(gulp.dest('build/assets/fonts/fontawesome-free/css'));
+}
+
+function fontawesomeWebfonts() {
+    return gulp.src('node_modules/@fortawesome/fontawesome-free/webfonts/*')
+        .pipe(gulp.dest('build/assets/fonts/fontawesome-free/webfonts'));
+}
+
+// VARS
+
+var fontawesome = gulp.parallel(fontawesomeCSS, fontawesomeWebfonts);
+
 // TASKS
 
-gulp.task('build', gulp.parallel(lemurro, assets, plugins, appCSS, appJS, pages, indexHTMLProd));
+gulp.task('build', gulp.parallel(lemurro, assets, plugins, fontawesome, appCSS, appJS, pages, indexHTMLProd));
 
 gulp.task('watcher', gulp.series(
-    gulp.parallel(lemurro, assets, plugins, appCSS, appJS, pages, indexHTMLDev),
+    gulp.parallel(lemurro, assets, plugins, fontawesome, appCSS, appJS, pages, indexHTMLDev),
     gulp.parallel(watcherCSS, watcherJS)
 ));

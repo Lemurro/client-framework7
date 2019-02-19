@@ -8,6 +8,7 @@
     "gulp-x-includer": "^0.1.2"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "~5.4.2",
     "lemurro-client-framework7-core-frontend": "~1.0.0"
   }
 }
