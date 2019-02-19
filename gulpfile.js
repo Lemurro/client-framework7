@@ -1,24 +1,11 @@
-var gulp     = require('gulp');           // Сам Gulp JS
-var cleanCSS = require('gulp-clean-css'); // Минификация CSS
-var concat   = require('gulp-concat');    // Склейка файлов
-var replace  = require('gulp-replace');   // Замена внутри файлов
-var uglify   = require('gulp-uglify');    // Минификация JS
+var gulp     = require('gulp');            // Сам Gulp JS
+var cleanCSS = require('gulp-clean-css');  // Минификация CSS
+var concat   = require('gulp-concat');     // Склейка файлов
+var includer = require('gulp-x-includer'); // Склейка html файлов
+var replace  = require('gulp-replace');    // Замена внутри файлов
+var uglify   = require('gulp-uglify');     // Минификация JS
 
-var pathCore = [
-    'node_modules/lemurro-client-framework7-core-frontend/dist/core.min.css',
-    'node_modules/lemurro-client-framework7-core-frontend/dist/core.min.js'
-];
-
-var pathLibs = [
-    'node_modules/framework7/css/framework7.min.css',
-    'node_modules/framework7/js/framework7.min.js',
-    'node_modules/inputmask/dist/min/inputmask/dependencyLibs/inputmask.dependencyLib.min.js',
-    'node_modules/inputmask/dist/min/inputmask/inputmask.min.js',
-    'node_modules/jsdeferred/jsdeferred.nodoc.js',
-    'node_modules/localforage/dist/localforage.min.js',
-    'node_modules/sweetalert2/dist/sweetalert2.min.css',
-    'node_modules/sweetalert2/dist/sweetalert2.min.js'
-];
+var pathsPlugins = [];
 
 // WATCHER
 
@@ -31,6 +18,30 @@ function watcherJS() {
 }
 
 // APP
+
+function assets() {
+    return gulp.src('src/assets/**/*')
+        .pipe(gulp.dest('build/assets'));
+}
+
+function plugins(done) {
+    if (pathsPlugins.length > 0) {
+        return gulp.src(pathsPlugins)
+            .pipe(gulp.dest('build/assets/plugins'));
+    } else {
+        done();
+    }
+}
+
+function lemurro() {
+    var files = [
+        'node_modules/lemurro-client-framework7-core-frontend/dist/lemurro.min.css',
+        'node_modules/lemurro-client-framework7-core-frontend/dist/lemurro.min.js'
+    ];
+
+    return gulp.src(files)
+        .pipe(gulp.dest('build/assets'));
+}
 
 function appCSS() {
     return gulp.src('src/css/*.css')
@@ -46,58 +57,32 @@ function appJS() {
         .pipe(gulp.dest('build/assets'));
 }
 
-function core() {
-    return gulp.src(pathCore)
-        .pipe(gulp.dest('build/assets'));
-}
-
-function libs() {
-    return gulp.src(pathLibs)
-        .pipe(gulp.dest('build/assets/plugins'));
-}
-
-function fontawesomeCSS() {
-    return gulp.src('node_modules/@fortawesome/fontawesome-free/css/all.min.css')
-        .pipe(gulp.dest('build/assets/fonts/fontawesome-free/css'));
-}
-
-function fontawesomeWebfonts() {
-    return gulp.src('node_modules/@fortawesome/fontawesome-free/webfonts/*')
-        .pipe(gulp.dest('build/assets/fonts/fontawesome-free/webfonts'));
-}
-
-function assets() {
-    return gulp.src('src/assets/**/*')
-        .pipe(gulp.dest('build/assets'));
-}
-
 function pages() {
-    return gulp.src('src/pages/*')
+    return gulp.src('src/html/pages/*')
+        .pipe(includer())
         .pipe(gulp.dest('build/pages'));
 }
 
 function indexHTMLDev() {
-    return gulp.src('src/index.html')
+    return gulp.src('src/html/index.html')
+        .pipe(includer())
         .pipe(gulp.dest('build'));
 }
 
 function indexHTMLProd() {
-    return gulp.src('src/index.html')
+    return gulp.src('src/html/index.html')
+        .pipe(includer())
         .pipe(replace('<!-- cordova.js here -->', '<script type="text/javascript" src="cordova.js"></script>'))
         .pipe(replace("var pathServerAPI = 'http://lemurro-api.localhost/';", "var pathServerAPI = 'http://your.api.domain.tld/';"))
         .pipe(replace('var modeCordova   = false;', 'var modeCordova   = true;'))
         .pipe(gulp.dest('build'));
 }
 
-// VARS
-
-var fontawesome = gulp.parallel(fontawesomeCSS, fontawesomeWebfonts);
-
 // TASKS
 
-gulp.task('build', gulp.parallel(core, libs, fontawesome, assets, appCSS, appJS, pages, indexHTMLProd));
+gulp.task('build', gulp.parallel(lemurro, assets, plugins, appCSS, appJS, pages, indexHTMLProd));
 
 gulp.task('watcher', gulp.series(
-    gulp.parallel(core, libs, fontawesome, assets, appCSS, appJS, pages, indexHTMLDev),
+    gulp.parallel(lemurro, assets, plugins, appCSS, appJS, pages, indexHTMLDev),
     gulp.parallel(watcherCSS, watcherJS)
 ));

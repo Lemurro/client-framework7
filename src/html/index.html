@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, minimal-ui, viewport-fit=cover">
+
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#2196f3">
+
+    <!-- include "include/css.html" -->
+
+    <title>Lemurro</title>
+</head>
+
+<body>
+    <!-- App root element -->
+    <div id="app">
+        <!-- Statusbar overlay -->
+        <div class="statusbar"></div>
+
+        <!-- Left panel with reveal effect -->
+        <div class="panel panel-left panel-reveal">
+            <div class="block">
+                <!-- include "include/menu.html" -->
+            </div>
+        </div>
+
+        <!-- Right panel with reveal effect -->
+        <div class="panel panel-right panel-reveal">
+            <!-- Динамический контент -->
+            <div id="js-user_info" class="block"></div>
+        </div>
+
+        <!-- Views -->
+        <div class="views">
+            <!-- Сюда будет загружен контент страницы -->
+            <div class="view view-main navbar-fixed"></div>
+        </div>
+    </div>
+
+    <!-- include "include/auth.html" -->
+    <!-- include "include/popup.html" -->
+
+    <!-- include "include/sidebar.html" -->
+
+    <!-- include "include/js.html" -->
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<!-- Login Screen -->
+<div id="js-login-screen" class="login-screen">
+    <div class="view">
+        <div class="page">
+            <div class="page-content login-screen-content">
+                <div class="login-screen__form">
+                    <div class="login-screen-title">
+                        <img src="assets/img/logo.png">
+                    </div>
+
+                    <!-- Auth.Phone -->
+                    <div id="js-auth-phone-get-form" class="list js-auth-form" style="display: none;">
+                        <ul>
+                            <li class="item-content item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Номер телефона</div>
+                                    <div class="item-input-wrap">
+                                        <input type="text" name="auth_id" class="js-phone-mask" title="Номер телефона">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="item-content item-input">
+                                <div class="item-inner">
+                                    <a href="javascript:lemurro.auth.getCode();" class="button button-raised button-fill">Получить код</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="js-auth-phone-check-form" class="list js-auth-form" style="display: none;">
+                        <ul>
+                            <li class="item-content item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Код из СМС</div>
+                                    <div class="item-input-wrap">
+                                        <input type="text" name="auth_code" class="js-code-mask" title="Код из СМС">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="item-content item-input">
+                                <div class="item-inner">
+                                    <a href="javascript:lemurro.auth.checkCode();" class="button button-raised button-fill">Отправить код</a>
+                                </div>
+                            </li>
+                            <li class="item-content item-input js-timer">
+                                <div class="item-inner">
+                                    <small>Не пришло смс? Повторно запросить код можно через
+                                        <span class="js-timer__count">60</span> сек.
+                                    </small>
+                                </div>
+                            </li>
+                            <li class="item-content js-resend">
+                                <div class="item-inner">
+                                    <a href="javascript:lemurro.auth.getCode();" class="button">Запросить код ещё раз</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /Auth.Phone -->
+
+                    <!-- Auth.Email -->
+                    <div id="js-auth-email-get-form" class="list js-auth-form" style="display: none;">
+                        <ul>
+                            <li class="item-content item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Электронная почта</div>
+                                    <div class="item-input-wrap">
+                                        <input type="text" name="auth_id" title="Электронная почта">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="item-content item-input">
+                                <div class="item-inner">
+                                    <a href="javascript:lemurro.auth.getCode();" class="button button-raised button-fill">Получить код</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="js-auth-email-check-form" class="list js-auth-form" style="display: none;">
+                        <ul>
+                            <li class="item-content item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Код из письма</div>
+                                    <div class="item-input-wrap">
+                                        <input type="text" name="auth_code" class="js-code-mask" title="Код из письма">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="item-content item-input">
+                                <div class="item-inner">
+                                    <a href="javascript:lemurro.auth.checkCode();" class="button button-raised button-fill">Отправить код</a>
+                                </div>
+                            </li>
+                            <li class="item-content item-input js-timer">
+                                <div class="item-inner">
+                                    <small>Не пришло письмо? Повторно запросить код можно через
+                                        <span class="js-timer__count">60</span> сек.
+                                    </small>
+                                </div>
+                            </li>
+                            <li class="item-content js-resend">
+                                <div class="item-inner">
+                                    <a href="javascript:lemurro.auth.getCode();" class="button">Запросить код ещё раз</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /Auth.Email -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
