@@ -98,6 +98,8 @@ var fontawesome = gulp.parallel(fontawesomeCSS, fontawesomeWebfonts);
 
 gulp.task('build', gulp.parallel(lemurro, assets, plugins, fontawesome, appCSS, appJS, pages, indexHTMLProd));
 
+gulp.task('build-dev', gulp.parallel(lemurro, assets, plugins, fontawesome, appCSS, appJS, pages, indexHTMLDev));
+
 gulp.task('watcher', gulp.series(
     gulp.parallel(lemurro, assets, plugins, fontawesome, appCSS, appJS, pages, indexHTMLDev),
     gulp.parallel(watcherCSS, watcherJS)
