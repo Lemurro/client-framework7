@@ -1,11 +1,19 @@
 var gulp     = require('gulp');            // Сам Gulp JS
 var cleanCSS = require('gulp-clean-css');  // Минификация CSS
 var concat   = require('gulp-concat');     // Склейка файлов
+var del      = require('del');             // Удаление файлов
 var includer = require('gulp-x-includer'); // Склейка html файлов
+var rename   = require('gulp-rename');     // Переименование файлов
 var replace  = require('gulp-replace');    // Замена внутри файлов
 var uglify   = require('gulp-uglify');     // Минификация JS
 
 var pathsPlugins = [];
+
+// CLEAN
+
+function clean() {
+    return del('build/**', {force: true});
+}
 
 // WATCHER
 
@@ -63,19 +71,28 @@ function pages() {
         .pipe(gulp.dest('build/pages'));
 }
 
+function indexHTMLProd() {
+    return gulp.src('src/html/index.html')
+        .pipe(includer())
+        .pipe(replace('<!-- cordova.js here -->', '<script type="text/javascript" src="cordova.js"></script>'))
+        .pipe(gulp.dest('build'));
+}
+
 function indexHTMLDev() {
     return gulp.src('src/html/index.html')
         .pipe(includer())
         .pipe(gulp.dest('build'));
 }
 
-function indexHTMLProd() {
-    return gulp.src('src/html/index.html')
-        .pipe(includer())
-        .pipe(replace('<!-- cordova.js here -->', '<script type="text/javascript" src="cordova.js"></script>'))
-        .pipe(replace("var pathServerAPI = 'http://lemurro-api.localhost/';", "var pathServerAPI = 'http://your.api.domain.tld/';"))
-        .pipe(replace('var modeCordova   = false;', 'var modeCordova   = true;'))
-        .pipe(gulp.dest('build'));
+function envProd() {
+    return gulp.src('src/env/env.js')
+        .pipe(gulp.dest('build/assets'));
+}
+
+function envDev() {
+    return gulp.src('src/env/env-dev.js')
+        .pipe(rename('env.js'))
+        .pipe(gulp.dest('build/assets'));
 }
 
 // FONTAWESOME
@@ -92,15 +109,18 @@ function fontawesomeWebfonts() {
 
 // VARS
 
-var fontawesome = gulp.parallel(fontawesomeCSS, fontawesomeWebfonts);
+var all = gulp.series(
+    clean,
+    gulp.parallel(lemurro, assets, plugins, fontawesomeCSS, fontawesomeWebfonts, appCSS, appJS, pages)
+);
 
 // TASKS
 
-gulp.task('build', gulp.parallel(lemurro, assets, plugins, fontawesome, appCSS, appJS, pages, indexHTMLProd));
+gulp.task('build', gulp.series(all, gulp.parallel(indexHTMLProd, envProd)));
 
-gulp.task('build-dev', gulp.parallel(lemurro, assets, plugins, fontawesome, appCSS, appJS, pages, indexHTMLDev));
+gulp.task('build-dev', gulp.series(all, gulp.parallel(indexHTMLDev, envDev)));
 
 gulp.task('watcher', gulp.series(
-    gulp.parallel(lemurro, assets, plugins, fontawesome, appCSS, appJS, pages, indexHTMLDev),
+    'build-dev',
     gulp.parallel(watcherCSS, watcherJS)
 ));
