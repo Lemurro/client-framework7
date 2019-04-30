@@ -28,11 +28,6 @@ function watcherJS() {
 
 // APP
 
-function assets() {
-    return gulp.src('src/assets/**/*')
-        .pipe(gulp.dest('build/assets'));
-}
-
 function plugins(done) {
     if (pathsPlugins.length > 0) {
         return gulp.src(pathsPlugins)
@@ -40,6 +35,21 @@ function plugins(done) {
     } else {
         done();
     }
+}
+
+function copyToBuild() {
+    return gulp.src('src/copy-to-build/**/*')
+        .pipe(gulp.dest('build'));
+}
+
+function fontawesomeCSS() {
+    return gulp.src('node_modules/@fortawesome/fontawesome-free/css/all.min.css')
+        .pipe(gulp.dest('build/assets/fonts/fontawesome-free/css'));
+}
+
+function fontawesomeWebfonts() {
+    return gulp.src('node_modules/@fortawesome/fontawesome-free/webfonts/*')
+        .pipe(gulp.dest('build/assets/fonts/fontawesome-free/webfonts'));
 }
 
 function lemurro() {
@@ -88,33 +98,31 @@ function indexHTMLDev() {
 }
 
 function envProd() {
-    return gulp.src('src/env/env.js')
-        .pipe(gulp.dest('build/assets'));
-}
-
-function envDev() {
-    return gulp.src('src/env/env-dev.js')
+    return gulp.src('src/env/prod.js')
         .pipe(rename('env.js'))
         .pipe(gulp.dest('build/assets'));
 }
 
-// FONTAWESOME
-
-function fontawesomeCSS() {
-    return gulp.src('node_modules/@fortawesome/fontawesome-free/css/all.min.css')
-        .pipe(gulp.dest('build/assets/fonts/fontawesome-free/css'));
-}
-
-function fontawesomeWebfonts() {
-    return gulp.src('node_modules/@fortawesome/fontawesome-free/webfonts/*')
-        .pipe(gulp.dest('build/assets/fonts/fontawesome-free/webfonts'));
+function envDev() {
+    return gulp.src('src/env/dev.js')
+        .pipe(rename('env.js'))
+        .pipe(gulp.dest('build/assets'));
 }
 
 // VARS
 
 var all = gulp.series(
     clean,
-    gulp.parallel(lemurro, assets, plugins, fontawesomeCSS, fontawesomeWebfonts, appCSS, appJS, pages)
+    gulp.parallel(
+        copyToBuild,
+        plugins,
+        fontawesomeCSS,
+        fontawesomeWebfonts,
+        lemurro,
+        appCSS,
+        appJS,
+        pages
+    )
 );
 
 // TASKS
