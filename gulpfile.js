@@ -1,11 +1,12 @@
 var gulp     = require('gulp');            // Сам Gulp JS
 var cleanCSS = require('gulp-clean-css');  // Минификация CSS
 var concat   = require('gulp-concat');     // Склейка файлов
-var del      = require('del');             // Удаление файлов
-var includer = require('gulp-x-includer'); // Склейка html файлов
 var rename   = require('gulp-rename');     // Переименование файлов
 var replace  = require('gulp-replace');    // Замена внутри файлов
+var sort     = require('gulp-sort');       // Сортировка списка файлов
 var uglify   = require('gulp-uglify');     // Минификация JS
+var includer = require('gulp-x-includer'); // Склейка html файлов
+var del      = require('del');             // Удаление файлов
 
 var pathsPlugins = [];
 
@@ -53,6 +54,7 @@ function lemurro() {
 
 function appCSS() {
     return gulp.src('src/css/*.css')
+        .pipe(sort())
         .pipe(concat('app.min.css'))
         .pipe(cleanCSS())
         .pipe(gulp.dest('build/assets'));
@@ -60,6 +62,7 @@ function appCSS() {
 
 function appJS() {
     return gulp.src('src/js/**/*.js')
+        .pipe(sort())
         .pipe(concat('app.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('build/assets'));

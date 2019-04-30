@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "~5.4.2",
+    "gulp-sort": "^2.0.0",
     "lemurro-client-framework7-core-frontend": "~1.4.2"
   }
 }
