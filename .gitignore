@@ -2,5 +2,4 @@ build
 node_modules
 src/env/dev.js
 src/env/prod.js
-vendor
 package-lock.json
