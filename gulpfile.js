@@ -66,7 +66,6 @@ function appCSS() {
     return gulp.src('src/css/*.css')
         .pipe(sort())
         .pipe(concat('app.min.css'))
-        .pipe(cleanCSS())
         .pipe(gulp.dest('build/assets'));
 }
 
@@ -74,6 +73,17 @@ function appJS() {
     return gulp.src('src/js/**/*.js')
         .pipe(sort())
         .pipe(concat('app.min.js'))
+        .pipe(gulp.dest('build/assets'));
+}
+
+function minAppCSS() {
+    return gulp.src('build/assets/app.min.css')
+        .pipe(cleanCSS())
+        .pipe(gulp.dest('build/assets'));
+}
+
+function minAppJS() {
+    return gulp.src('build/assets/app.min.js')
         .pipe(uglify())
         .pipe(gulp.dest('build/assets'));
 }
@@ -127,11 +137,28 @@ var all = gulp.series(
 
 // TASKS
 
-gulp.task('build', gulp.series(all, gulp.parallel(indexHTMLProd, envProd)));
+gulp.task('build', gulp.series(
+    all,
+    gulp.parallel(
+        minAppCSS,
+        minAppJS,
+        indexHTMLProd,
+        envProd
+    )
+));
 
-gulp.task('build-dev', gulp.series(all, gulp.parallel(indexHTMLDev, envDev)));
+gulp.task('build-dev', gulp.series(
+    all,
+    gulp.parallel(
+        indexHTMLDev,
+        envDev
+    )
+));
 
 gulp.task('watcher', gulp.series(
     'build-dev',
-    gulp.parallel(watcherCSS, watcherJS)
+    gulp.parallel(
+        watcherCSS,
+        watcherJS
+    )
 ));
