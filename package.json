@@ -12,6 +12,6 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "~5.4.2",
-    "lemurro-client-framework7-core-frontend": "~1.5.0"
+    "lemurro-client-framework7-core-frontend": "~1.6.0"
   }
 }
